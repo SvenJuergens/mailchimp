@@ -20,7 +20,7 @@
   "require": {
     "typo3/cms-core": "^10.4 || ^11.5",
     "drewm/mailchimp-api": "^2",
-    "helhum/typoscript-rendering": "^2"
+    "helhum/typoscript-rendering": "^2.4"
   },
   "autoload": {
     "psr-4": {
