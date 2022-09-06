@@ -1,12 +1,11 @@
 # TYPO3 CMS Extension `mailchimp`
 
-[![Build Status](https://travis-ci.org/sup7even/mailchimp.svg?branch=master)](https://travis-ci.org/sup7even/mailchimp)
 
 This extension implements the most important feature of MailChimp: Let the users register for a specific list, including interest groups!
 
 ## Requirements
 
-- TYPO3 CMS 9.5 - 10.4
+- TYPO3 CMS 10.4 - 11.5
 - MailChimp API key
 - License: GPL 2
 
