@@ -1,5 +1,6 @@
 <?php
-defined('TYPO3_MODE') or die();
+defined('TYPO3') || die();
+
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
     'Mailchimp',
