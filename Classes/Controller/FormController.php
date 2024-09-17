@@ -75,7 +75,6 @@ class FormController extends ActionController
         try {
             $apiService = $this->getApiService($this->settings['apiKey'] ?? '');
             $apiService->register($this->settings['listId'], $form, $doublOptIn);
-            ray($apiService);
         } catch (MemberExistsException $e) {
             $this->view->assign('error', 'memberExists');
             $this->view->assign('exception', $e);
