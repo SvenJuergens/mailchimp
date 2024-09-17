@@ -10,7 +10,7 @@ class FormDtoTest extends UnitTestCase
     /**
      * @test
      */
-    public function firstNameCanBeSet()
+    public function firstNameCanBeSet(): void
     {
         $domainModelInstance = new FormDto();
         $subject = 'Max';
@@ -21,7 +21,7 @@ class FormDtoTest extends UnitTestCase
     /**
      * @test
      */
-    public function lastNameCanBeSet()
+    public function lastNameCanBeSet(): void
     {
         $domainModelInstance = new FormDto();
         $subject = 'Mustermann';
@@ -32,7 +32,7 @@ class FormDtoTest extends UnitTestCase
     /**
      * @test
      */
-    public function emailCanBeSet()
+    public function emailCanBeSet(): void
     {
         $domainModelInstance = new FormDto();
         $subject = 'fo@bar.com';
@@ -43,7 +43,7 @@ class FormDtoTest extends UnitTestCase
     /**
      * @test
      */
-    public function interestsCanBeSet()
+    public function interestsCanBeSet(): void
     {
         $domainModelInstance = new FormDto();
         $subject = ['fo', 'bar'];
@@ -54,7 +54,7 @@ class FormDtoTest extends UnitTestCase
     /**
      * @test
      */
-    public function interestCanBeSet()
+    public function interestCanBeSet(): void
     {
         $domainModelInstance = new FormDto();
         $subject = '12345';
@@ -65,7 +65,7 @@ class FormDtoTest extends UnitTestCase
     /**
      * @test
      */
-    public function mergeFieldsCanBeTest()
+    public function mergeFieldsCanBeTest(): void
     {
         $domainModelInstance = new FormDto();
         for ($i = 1; $i <= 10; $i++) {

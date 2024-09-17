@@ -14,7 +14,7 @@ class SimplifyLabelViewHelper extends AbstractViewHelper
     /**
      * Initialize arguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('label', 'string', 'label', false, '');
         $this->registerArgument('toLowerCase', 'bool', 'should it be lowered', false, false);
@@ -26,7 +26,7 @@ class SimplifyLabelViewHelper extends AbstractViewHelper
      * @param RenderingContextInterface $renderingContext
      * @return string
      */
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
+    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext): string
     {
         $label = $arguments['label'] ?: $renderChildrenClosure();
 

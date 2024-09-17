@@ -12,9 +12,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ItemsProcFunc
 {
-
     /** @var ExtensionConfiguration */
-    protected $extensionConfiguration;
+    protected mixed $extensionConfiguration;
 
     public function __construct()
     {
@@ -27,7 +26,7 @@ class ItemsProcFunc
      * @param array $config
      * @throws ApiKeyMissingException
      */
-    public function getApiKeys(array &$config)
+    public function getApiKeys(array &$config): void
     {
         $keyList = $this->extensionConfiguration->getApiKeys();
         foreach ($keyList as $hash => $item) {
@@ -35,7 +34,7 @@ class ItemsProcFunc
             $label = $label ?: $item['label'];
             $config['items'][] = [
                 $label,
-                $hash
+                $hash,
             ];
         }
     }
@@ -45,7 +44,7 @@ class ItemsProcFunc
      *
      * @param array $config
      */
-    public function getLists(array &$config)
+    public function getLists(array &$config): void
     {
         $apiKeyHash = null;
         try {
@@ -71,7 +70,7 @@ class ItemsProcFunc
      *
      * @param array $config
      */
-    public function getInterests(array &$config)
+    public function getInterests(array &$config): void
     {
         $elementId = (int)$config['row']['uid'];
         if ($elementId > 0) {
@@ -99,7 +98,7 @@ class ItemsProcFunc
      * @param int $elementId
      * @return array
      */
-    private function extractSettingsFromRecord(int $elementId)
+    private function extractSettingsFromRecord(int $elementId): array
     {
         $contentElement = BackendUtility::getRecord('tt_content', $elementId);
         $flexFormService = GeneralUtility::makeInstance(FlexFormService::class);
@@ -114,7 +113,7 @@ class ItemsProcFunc
      * @param string|null $hash
      * @return ApiService
      */
-    private function getApiService(string $hash = null)
+    private function getApiService(string $hash = null): ApiService
     {
         return GeneralUtility::makeInstance(ApiService::class, $hash);
     }
@@ -122,7 +121,7 @@ class ItemsProcFunc
     /**
      * @return LanguageService
      */
-    private function getLanguageService()
+    private function getLanguageService(): LanguageService
     {
         return $GLOBALS['LANG'];
     }

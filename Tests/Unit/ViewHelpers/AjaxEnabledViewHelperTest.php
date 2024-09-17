@@ -12,7 +12,7 @@ class AjaxEnabledViewHelperTest extends UnitTestCase
      * @test
      * @dataProvider ajaxEnabledWorksDataProvider
      */
-    public function ajaxEnabledWorks($setting, $extIsLoaded, $expeted)
+    public function ajaxEnabledWorks($setting, $extIsLoaded, $expeted): void
     {
         $viewHelper = $this->getAccessibleMock(AjaxEnabledViewHelper::class, ['renderChildren'], [], '', false);
         $viewHelper->method('renderChildren')->willReturn($code);

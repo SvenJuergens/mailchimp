@@ -1,0 +1,10 @@
+services:
+  # general settings
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Sup7even\Mailchimp\:
+    resource: '../Classes/*'
+

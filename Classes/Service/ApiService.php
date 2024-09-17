@@ -15,14 +15,17 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class ApiService
 {
     /** @var MailChimp */
-    protected $api;
+    protected MailChimp $api;
 
     /** @var $logger Logger */
     protected $logger;
 
     /** @var string */
-    protected $apiKey = '';
+    protected string $apiKey = '';
 
+    /**
+     * @throws \Exception
+     */
     public function __construct($usedApiKeyHash = null)
     {
         require_once(ExtensionManagementUtility::extPath('mailchimp', 'Resources/Private/Contrib/MailChimp/MailChimp.php'));
@@ -40,7 +43,7 @@ class ApiService
         $this->logger = GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
     }
 
-    public function getApiKey()
+    public function getApiKey(): string
     {
         return $this->apiKey;
     }
@@ -51,7 +54,7 @@ class ApiService
      * @param int $maxCount max lists to be returned
      * @return array
      */
-    public function getLists($maxCount = 50)
+    public function getLists(int $maxCount = 50): array
     {
         $groups = [];
         $list = $this->api->get('lists', ['count' => $maxCount]);
@@ -68,7 +71,7 @@ class ApiService
      * @param string $list
      * @return array|false
      */
-    public function getList(string $list)
+    public function getList(string $list): bool|array
     {
         return $this->api->get('lists/' . $list);
     }
@@ -79,7 +82,7 @@ class ApiService
      * @param string $listId
      * @return array
      */
-    public function getInterestLists(string $listId)
+    public function getInterestLists(string $listId): array
     {
         $groups = [];
         $list = $this->api->get('lists/' . $listId . '/interest-categories/');
@@ -96,12 +99,12 @@ class ApiService
      * @param string $interestId
      * @return array
      */
-    public function getCategories(string $listId, string $interestId)
+    public function getCategories(string $listId, string $interestId): array
     {
         $groupData = $this->api->get('lists/' . $listId . '/interest-categories/' . $interestId . '/');
         $result = [
             'title' => $groupData['title'],
-            'type' => $groupData['type']
+            'type' => $groupData['type'],
         ];
 
         $list = $this->api->get('lists/' . $listId . '/interest-categories/' . $interestId . '/interests');
@@ -122,7 +125,7 @@ class ApiService
      * @throws GeneralException
      * @throws MemberExistsException
      */
-    public function register(string $listId, FormDto $form, bool $doubleOptIn = true)
+    public function register(string $listId, FormDto $form, bool $doubleOptIn = true): void
     {
         $data = $this->getRegistrationData($listId, $form, $doubleOptIn);
         $response = $this->api->post("lists/$listId/members", $data);
@@ -149,7 +152,7 @@ class ApiService
      * @param bool $doubleOptIn
      * @return array
      */
-    protected function getRegistrationData(string $listId, FormDto $form, bool $doubleOptIn)
+    protected function getRegistrationData(string $listId, FormDto $form, bool $doubleOptIn): array
     {
         $data = [
             'email_address' => $form->getEmail(),
@@ -157,7 +160,7 @@ class ApiService
             'merge_fields' => [
                 'FNAME' => (!empty($form->getFirstName())) ? $form->getFirstName() : '',
                 'LNAME' => (!empty($form->getLastName())) ? $form->getLastName() : '',
-            ]
+            ],
         ];
         $interestData = $this->getInterests($form);
         if ($interestData) {
@@ -168,7 +171,7 @@ class ApiService
             $_params = [
                 'data' => &$data,
                 'listId' => $listId,
-                'form' => $form
+                'form' => $form,
             ];
             foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['mailchimp']['memberData'] as $funcName) {
                 GeneralUtility::callUserFunction($funcName, $_params, $this);
@@ -181,7 +184,7 @@ class ApiService
      * @param FormDto $form
      * @return array
      */
-    protected function getInterests(FormDto $form)
+    protected function getInterests(FormDto $form): array
     {
         $interestData = [];
         // multi interests

@@ -11,7 +11,7 @@ class ExtensionConfigurationTest extends UnitTestCase
     /**
      * @test
      */
-    public function noApiKeyThrowsException()
+    public function noApiKeyThrowsException(): void
     {
         $this->expectException(ApiKeyMissingException::class);
         $config = new ExtensionConfiguration();

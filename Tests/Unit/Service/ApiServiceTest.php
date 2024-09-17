@@ -12,7 +12,7 @@ class ApiServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function properInterestsAreReturned()
+    public function properInterestsAreReturned(): void
     {
         $mockedApiService = $this->getAccessibleMock(ApiService::class, ['dummy'], [], '', false);
         $form = new FormDto();

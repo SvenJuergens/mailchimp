@@ -12,7 +12,7 @@ class AjaxEnabledViewHelper extends AbstractConditionViewHelper
 {
     /**
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('isEnabled', 'bool', 'Is enabled');
         parent::initializeArguments();
@@ -22,7 +22,7 @@ class AjaxEnabledViewHelper extends AbstractConditionViewHelper
      * @param array|null $arguments
      * @return bool
      */
-    protected static function evaluateCondition($arguments = null)
+    protected static function evaluateCondition($arguments = null): bool
     {
         return (int)$arguments['isEnabled'] === 1 && ExtensionManagementUtility::isLoaded('typoscript_rendering');
     }
@@ -30,7 +30,7 @@ class AjaxEnabledViewHelper extends AbstractConditionViewHelper
     /**
      * @return mixed
      */
-    public function render()
+    public function render(): mixed
     {
         if (static::evaluateCondition($this->arguments)) {
             return $this->renderThenChild();

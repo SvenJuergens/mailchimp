@@ -18,9 +18,8 @@
   ],
   "license": ["GPL-2.0-or-later"],
   "require": {
-    "typo3/cms-core": "^10.4 || ^11.5",
-    "drewm/mailchimp-api": "^2",
-    "helhum/typoscript-rendering": "^2.4"
+    "typo3/cms-core": "^11.5 || ^12.4",
+    "drewm/mailchimp-api": "^2"
   },
   "autoload": {
     "psr-4": {

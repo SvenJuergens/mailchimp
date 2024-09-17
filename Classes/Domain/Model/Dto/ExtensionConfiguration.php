@@ -8,18 +8,17 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ExtensionConfiguration implements SingletonInterface
 {
-
     /** @var array */
-    protected $apiKeys = [];
+    protected array $apiKeys = [];
 
     /** @var string */
-    protected $proxy = '';
+    protected string $proxy = '';
 
     /** @var string */
-    protected $proxyPort = '';
+    protected string $proxyPort = '';
 
     /** @var bool */
-    protected $forceIp4 = false;
+    protected bool $forceIp4 = false;
 
     public function __construct()
     {
@@ -37,7 +36,7 @@ class ExtensionConfiguration implements SingletonInterface
      * @return array
      * @throws ApiKeyMissingException
      */
-    public function getApiKeys()
+    public function getApiKeys(): array
     {
         if (empty($this->apiKeys)) {
             throw new ApiKeyMissingException('API key is missing');
@@ -50,7 +49,7 @@ class ExtensionConfiguration implements SingletonInterface
      *
      * @return string
      */
-    public function getFirstApiKey()
+    public function getFirstApiKey(): string
     {
         $firstItem = current($this->apiKeys);
         return $firstItem['key'] ?? '';
@@ -60,7 +59,7 @@ class ExtensionConfiguration implements SingletonInterface
      * @param string $hash
      * @return string
      */
-    public function getApiKeyByHash(string $hash)
+    public function getApiKeyByHash(string $hash): string
     {
         $settings = $this->getApiKeyConfiguration($hash);
         return $settings['key'];
@@ -70,7 +69,7 @@ class ExtensionConfiguration implements SingletonInterface
      * @param string $hash
      * @return string
      */
-    public function getApiKeyLabel(string $hash)
+    public function getApiKeyLabel(string $hash): string
     {
         $settings = $this->getApiKeyConfiguration($hash);
         return $settings['label'];
@@ -80,7 +79,7 @@ class ExtensionConfiguration implements SingletonInterface
      * @param string $hash
      * @return array
      */
-    private function getApiKeyConfiguration(string $hash)
+    private function getApiKeyConfiguration(string $hash): array
     {
         if (!isset($this->apiKeys[$hash])) {
             throw new \UnexpectedValueException(sprintf('For hash "%s" no API key found', $hash), 1513232660);
@@ -91,7 +90,7 @@ class ExtensionConfiguration implements SingletonInterface
     /**
      * @return string
      */
-    public function getProxy()
+    public function getProxy(): string
     {
         return $this->proxy;
     }
@@ -99,7 +98,7 @@ class ExtensionConfiguration implements SingletonInterface
     /**
      * @return string
      */
-    public function getProxyPort()
+    public function getProxyPort(): string
     {
         return $this->proxyPort;
     }
@@ -108,7 +107,7 @@ class ExtensionConfiguration implements SingletonInterface
      * @param string $apiKey
      * @return ExtensionConfiguration
      */
-    private function setApiKeys(string $apiKey)
+    private function setApiKeys(string $apiKey): ExtensionConfiguration
     {
         $keys = GeneralUtility::trimExplode(',', $apiKey, true);
         if (count($keys) === 1) {
@@ -131,12 +130,12 @@ class ExtensionConfiguration implements SingletonInterface
         return $this;
     }
 
-    private function addApiKey($key, $label = 'default')
+    private function addApiKey($key, $label = 'default'): void
     {
         $hash = md5($key);
         $this->apiKeys[$hash] = [
             'key' => $key,
-            'label' => $label
+            'label' => $label,
         ];
     }
 
@@ -144,7 +143,7 @@ class ExtensionConfiguration implements SingletonInterface
      * @param string $proxy
      * @return ExtensionConfiguration
      */
-    private function setProxy(string $proxy)
+    private function setProxy(string $proxy): ExtensionConfiguration
     {
         $this->proxy = $proxy;
         return $this;
@@ -154,7 +153,7 @@ class ExtensionConfiguration implements SingletonInterface
      * @param string $proxyPort
      * @return ExtensionConfiguration
      */
-    private function setProxyPort(string $proxyPort)
+    private function setProxyPort(string $proxyPort): ExtensionConfiguration
     {
         $this->proxyPort = $proxyPort;
         return $this;

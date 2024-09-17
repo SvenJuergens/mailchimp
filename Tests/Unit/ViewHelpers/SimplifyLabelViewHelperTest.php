@@ -14,7 +14,7 @@ class SimplifyLabelViewHelperTest extends UnitTestCase
      * @dataProvider checkViewHelperOutputDataProvider
      * @test
      */
-    public function checkViewHelperOutput($input, $expected)
+    public function checkViewHelperOutput($input, $expected): void
     {
         $viewHelper = new SimplifyLabelViewHelper();
 

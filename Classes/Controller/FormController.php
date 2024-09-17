@@ -2,27 +2,27 @@
 
 namespace Sup7even\Mailchimp\Controller;
 
+use Psr\Http\Message\ResponseInterface;
 use Sup7even\Mailchimp\Domain\Model\Dto\FormDto;
 use Sup7even\Mailchimp\Exception\GeneralException;
 use Sup7even\Mailchimp\Exception\MemberExistsException;
 use Sup7even\Mailchimp\Service\ApiService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 
 class FormController extends ActionController
 {
-
     /**
      * @param FormDto|null $form
-     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("form")
      */
-    public function indexAction(FormDto $form = null)
+    #[IgnoreValidation(['value' => 'form'])]
+    public function indexAction(FormDto $form = null): ResponseInterface
     {
         if ($form === null) {
             /** @var FormDto $form */
             $form = GeneralUtility::makeInstance(FormDto::class);
-            $prefill = GeneralUtility::_GP('email');
+            $prefill = $this->request->getParsedBody()['email'] ?? $this->request->getQueryParams()['email'] ?? null;
             if ($prefill) {
                 $form->setEmail($prefill);
             }
@@ -38,33 +38,35 @@ class FormController extends ActionController
         $this->view->assignMultiple([
             'form' => $form,
             'interests' => $interests,
-            'apiKey' => $apiService->getApiKey()
+            'apiKey' => $apiService->getApiKey(),
         ]);
+        return $this->htmlResponse();
     }
 
     /**
      * @param FormDto|null $form
-     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("form")
      */
-    public function ajaxResponseAction(FormDto $form = null)
+    #[IgnoreValidation(['value' => 'form'])]
+    public function ajaxResponseAction(FormDto $form = null): ResponseInterface
     {
         $this->handleRegistration($form);
+        return $this->htmlResponse();
     }
 
     /**
      * @param FormDto|null $form
-     * @throws StopActionException
      */
-    public function responseAction(FormDto $form = null)
+    public function responseAction(FormDto $form = null): ResponseInterface
     {
         if ($form === null) {
             $this->redirect('index');
         }
 
         $this->handleRegistration($form);
+        return $this->htmlResponse();
     }
 
-    protected function handleRegistration(FormDto $form = null)
+    protected function handleRegistration(FormDto $form = null): void
     {
         $doublOptIn = true;
         if (isset($this->settings['skipDoubleOptIn']) && $this->settings['skipDoubleOptIn'] == 1) {
@@ -73,6 +75,7 @@ class FormController extends ActionController
         try {
             $apiService = $this->getApiService($this->settings['apiKey'] ?? '');
             $apiService->register($this->settings['listId'], $form, $doublOptIn);
+            ray($apiService);
         } catch (MemberExistsException $e) {
             $this->view->assign('error', 'memberExists');
             $this->view->assign('exception', $e);
@@ -80,9 +83,8 @@ class FormController extends ActionController
             $this->view->assign('error', 'general');
             $this->view->assign('exception', $e);
         }
-
         $this->view->assignMultiple([
-            'form' => $form
+            'form' => $form,
         ]);
     }
 

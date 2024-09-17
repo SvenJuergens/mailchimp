@@ -3,7 +3,7 @@ defined('TYPO3') || die();
 
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'Sup7even.Mailchimp',
+    'Mailchimp',
     'Registration',
     'Mailchimp',
     'ext-mailchimp-wizard-icon'

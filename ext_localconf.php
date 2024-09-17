@@ -1,24 +1,18 @@
 <?php
-defined('TYPO3') || die();
 
+defined('TYPO3') || die();
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
     'Mailchimp',
     'Registration',
     [
-        \Sup7even\Mailchimp\Controller\FormController::class => 'index,response,ajaxResponse'
+        \Sup7even\Mailchimp\Controller\FormController::class => 'index,response,ajaxResponse',
     ],
     [
-        \Sup7even\Mailchimp\Controller\FormController::class => 'response,ajaxResponse'
+        \Sup7even\Mailchimp\Controller\FormController::class => 'response,ajaxResponse',
     ]
 );
 
-$iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
-$iconRegistry->registerIcon(
-    'ext-mailchimp-wizard-icon',
-    \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
-    ['source' => 'EXT:mailchimp/Resources/Public/Icons/Extension.png']
-);
 
 // Page module hook
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['list_type_Info']['mailchimp_registration']['mailchimp'] =
