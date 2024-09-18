@@ -49,6 +49,9 @@ class FormController extends ActionController
     #[IgnoreValidation(['value' => 'form'])]
     public function ajaxResponseAction(FormDto $form = null): ResponseInterface
     {
+        if ($form === null) {
+           return $this->htmlResponse('');
+        }
         $this->handleRegistration($form);
         return $this->htmlResponse();
     }
