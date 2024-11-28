@@ -50,7 +50,7 @@ class FormController extends ActionController
     public function ajaxResponseAction(FormDto $form = null): ResponseInterface
     {
         if ($form === null) {
-           return $this->htmlResponse('');
+            return $this->htmlResponse('');
         }
         $this->handleRegistration($form);
         return $this->htmlResponse();
@@ -75,15 +75,17 @@ class FormController extends ActionController
         if (isset($this->settings['skipDoubleOptIn']) && $this->settings['skipDoubleOptIn'] == 1) {
             $doublOptIn = false;
         }
-        try {
-            $apiService = $this->getApiService($this->settings['apiKey'] ?? '');
-            $apiService->register($this->settings['listId'], $form, $doublOptIn);
-        } catch (MemberExistsException $e) {
-            $this->view->assign('error', 'memberExists');
-            $this->view->assign('exception', $e);
-        } catch (GeneralException $e) {
-            $this->view->assign('error', 'general');
-            $this->view->assign('exception', $e);
+        if ($form !== null) {
+            try {
+                $apiService = $this->getApiService($this->settings['apiKey'] ?? '');
+                $apiService->register($this->settings['listId'], $form, $doublOptIn);
+            } catch (MemberExistsException $e) {
+                $this->view->assign('error', 'memberExists');
+                $this->view->assign('exception', $e);
+            } catch (GeneralException $e) {
+                $this->view->assign('error', 'general');
+                $this->view->assign('exception', $e);
+            }
         }
         $this->view->assignMultiple([
             'form' => $form,
