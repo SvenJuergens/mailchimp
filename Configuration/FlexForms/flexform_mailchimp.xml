@@ -2,85 +2,73 @@
     <sheets>
         <sDEF>
             <ROOT>
-                <TCEforms>
-                    <sheetTitle>LLL:EXT:mailchimp/Resources/Private/Language/locallang.xlf:flexform.title</sheetTitle>
-                </TCEforms>
+                <sheetTitle>LLL:EXT:mailchimp/Resources/Private/Language/locallang.xlf:flexform.title</sheetTitle>
                 <type>array</type>
                 <el>
                     <!-- API key -->
                     <settings.apiKey>
-                        <TCEforms>
-                            <label>LLL:EXT:mailchimp/Resources/Private/Language/locallang.xlf:flexform.apiKey</label>
-                            <onChange>reload</onChange>
-                            <config>
-                                <type>select</type>
-                                <itemsProcFunc>Sup7even\Mailchimp\Hooks\Backend\ItemsProcFunc->getApiKeys</itemsProcFunc>
-                                <renderType>selectSingle</renderType>
-                                <items>
-                                    <numIndex index="1">
-                                        <numIndex index="0"></numIndex>
-                                        <numIndex index="1"></numIndex>
-                                    </numIndex>
-                                </items>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:mailchimp/Resources/Private/Language/locallang.xlf:flexform.apiKey</label>
+                        <onChange>reload</onChange>
+                        <config>
+                            <type>select</type>
+                            <itemsProcFunc>Sup7even\Mailchimp\Hooks\Backend\ItemsProcFunc->getApiKeys</itemsProcFunc>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="1">
+                                    <numIndex index="0"></numIndex>
+                                    <numIndex index="1"></numIndex>
+                                </numIndex>
+                            </items>
+                        </config>
                     </settings.apiKey>
 
                     <!-- List -->
                     <settings.listId>
-                        <TCEforms>
-                            <label>LLL:EXT:mailchimp/Resources/Private/Language/locallang.xlf:flexform.list</label>
-                            <onChange>reload</onChange>
-                            <config>
-                                <type>select</type>
-                                <itemsProcFunc>Sup7even\Mailchimp\Hooks\Backend\ItemsProcFunc->getLists</itemsProcFunc>
-                                <renderType>selectSingle</renderType>
-                                <items>
-                                    <numIndex index="1">
-                                        <numIndex index="0"></numIndex>
-                                        <numIndex index="1"></numIndex>
-                                    </numIndex>
-                                </items>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:mailchimp/Resources/Private/Language/locallang.xlf:flexform.list</label>
+                        <onChange>reload</onChange>
+                        <config>
+                            <type>select</type>
+                            <itemsProcFunc>Sup7even\Mailchimp\Hooks\Backend\ItemsProcFunc->getLists</itemsProcFunc>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="1">
+                                    <numIndex index="0"></numIndex>
+                                    <numIndex index="1"></numIndex>
+                                </numIndex>
+                            </items>
+                        </config>
                     </settings.listId>
 
                     <!-- Interest group -->
                     <settings.interestId>
-                        <TCEforms>
-                            <label>LLL:EXT:mailchimp/Resources/Private/Language/locallang.xlf:flexform.interests</label>
-                            <config>
-                                <type>select</type>
-                                <itemsProcFunc>Sup7even\Mailchimp\Hooks\Backend\ItemsProcFunc->getInterests</itemsProcFunc>
-                                <renderType>selectSingle</renderType>
-                                <items>
-                                    <numIndex index="1">
-                                        <numIndex index="0"></numIndex>
-                                        <numIndex index="1"></numIndex>
-                                    </numIndex>
-                                </items>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:mailchimp/Resources/Private/Language/locallang.xlf:flexform.interests</label>
+                        <config>
+                            <type>select</type>
+                            <itemsProcFunc>Sup7even\Mailchimp\Hooks\Backend\ItemsProcFunc->getInterests</itemsProcFunc>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="1">
+                                    <numIndex index="0"></numIndex>
+                                    <numIndex index="1"></numIndex>
+                                </numIndex>
+                            </items>
+                        </config>
                     </settings.interestId>
 
                     <!-- Use ajax -->
                     <settings.useAjax>
-                        <TCEforms>
-                            <label>LLL:EXT:mailchimp/Resources/Private/Language/locallang.xlf:flexform.useAjax</label>
-                            <config>
-                                <type>check</type>
-                                <default>0</default>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:mailchimp/Resources/Private/Language/locallang.xlf:flexform.useAjax</label>
+                        <config>
+                            <type>check</type>
+                            <default>0</default>
+                        </config>
                     </settings.useAjax>
 
                     <settings.identifier>
-                        <TCEforms>
-                            <label>LLL:EXT:mailchimp/Resources/Private/Language/locallang.xlf:flexform.identifier</label>
-                            <config>
-                                <type>input</type>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:mailchimp/Resources/Private/Language/locallang.xlf:flexform.identifier</label>
+                        <config>
+                            <type>input</type>
+                        </config>
                     </settings.identifier>
                 </el>
             </ROOT>
