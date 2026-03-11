@@ -130,6 +130,10 @@ class ApiService
         $data = $this->getRegistrationData($listId, $form, $doubleOptIn);
         $response = $this->api->post("lists/$listId/members", $data);
 
+        if (!is_array($response)) {
+            return;
+        }
+
         if ($response['status'] === 400 || $response['status'] === 401 || $response['status'] === 404) {
             $this->logger->error($response['status'] . ' ' . $response['detail']);
             $this->logger->error($response['detail'], (array)($response['errors'] ?? []));
